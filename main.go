@@ -58,6 +58,8 @@ func init() {
 }
 
 func main() {
+	http.FileServer(http.Dir("."))
+
 	http.Handle("/", handlerSelection(http.HandlerFunc(listFilesHandler), http.StripPrefix("/assets/", http.FileServer(http.FS(assetsContent)))))
 	log.Println("serving", rootDir)
 	http.ListenAndServe(net.JoinHostPort(host, port), nil)
